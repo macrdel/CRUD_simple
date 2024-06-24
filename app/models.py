@@ -4,7 +4,7 @@ from .database import Base
 from .schemas import Gender
 
 class Customer(Base):
-    __tablename__ = "customers"
+    __tablename__ = "customer"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
@@ -18,7 +18,7 @@ class Customer(Base):
 
 
 class Product(Base):
-    __tablename__ = "products"
+    __tablename__ = "product"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
@@ -29,7 +29,7 @@ class Product(Base):
 
 
 class PurchaseItem(Base):
-    __tablename__ = "purchase_items"
+    __tablename__ = "purchase_item"
 
     id = Column(Integer, primary_key=True, index=True)
     purchase_id = Column(Integer, ForeignKey("purchases.id"))
@@ -43,7 +43,7 @@ class PurchaseItem(Base):
 
 
 class Purchase(Base):
-    __tablename__ = "purchases"
+    __tablename__ = "purchase"
 
     id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.id"))
