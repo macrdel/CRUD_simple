@@ -14,7 +14,8 @@ def get_report(db: Session, purchase_date: date):
         Customer.id.label('customer_id'),
         Customer.name.label('customer_name'),
         func.sum(PurchaseItem.total_price).label('total_sum')
-    ).join(Purchase).join(PurchaseItem)\
+    ).join(Purchase, Purchase.customer_id == Customer.id)
+     .join(PurchaseItem, PurchaseItem.purchase_id == Purchase.id)\
      .filter(Purchase.purchase_date == purchase_date)\
      .group_by(Customer.id)\
      .order_by(func.sum(PurchaseItem.total_price).desc())\
