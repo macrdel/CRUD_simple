@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean, Date, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, Date, Float, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from .database import Base
+from .schemas import Gender
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -8,7 +9,7 @@ class Customer(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     birth = Column(Integer)
-    gender = Column(String)
+    gender = Column(Enum(Gender))
     registration_date = Column(Date)
     consent = Column(Boolean)
     photo = Column(String, nullable=True)
