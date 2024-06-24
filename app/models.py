@@ -14,7 +14,7 @@ class Customer(Base):
     consent = Column(Boolean)
     photo = Column(String, nullable=True)
 
-    purchases = relationship("Purchase", back_populates="customer")
+    purchases = relationship("Purchase", back_populates="customer", cascade="all, delete-orphan")
 
 
 class Product(Base):
@@ -25,7 +25,7 @@ class Product(Base):
     purchase_price = Column(Float)
     sale_price = Column(Float)
 
-    purchase_items = relationship("PurchaseItem", back_populates="product")
+    purchase_items = relationship("PurchaseItem", back_populates="product", cascade="all, delete-orphan")
 
 
 class PurchaseItem(Base):
@@ -50,4 +50,4 @@ class Purchase(Base):
     purchase_date = Column(Date)
 
     customer = relationship("Customer", back_populates="purchases")
-    items = relationship("PurchaseItem", back_populates="purchase")
+    items = relationship("PurchaseItem", back_populates="purchase", cascade="all, delete-orphan")
