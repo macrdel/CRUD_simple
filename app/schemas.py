@@ -68,10 +68,10 @@ class PurchaseBase(BaseModel):
     purchase_date: date
 
 class PurchaseCreate(PurchaseBase):
-    pass
+    items: List[PurchaseItemCreate]
 
 class PurchaseUpdate(PurchaseBase):
-    pass
+    items: List[PurchaseItemUpdate]
 
 class Purchase(PurchaseBase):
     id: int
