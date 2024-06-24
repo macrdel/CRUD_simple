@@ -19,8 +19,8 @@ def update_customer(db: Session, customer_id: int, customer: CustomerUpdate):
     db_customer = db.query(Customer).filter(Customer.id == customer_id).first()
     if not db_customer:
         return None
-    for var, value in vars(customer).items():
-        setattr(db_customer, var, value) if value else None
+    for key, value in customer.dict(exclude_unset=True).items():
+        setattr(db_customer, key, value)
     db.commit()
     db.refresh(db_customer)
     return db_customer
