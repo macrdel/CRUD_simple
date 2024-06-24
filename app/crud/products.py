@@ -19,8 +19,8 @@ def update_product(db: Session, product_id: int, product: ProductUpdate):
     db_product = db.query(Product).filter(Product.id == product_id).first()
     if not db_product:
         return None
-    for var, value in vars(product).items():
-        setattr(db_product, var, value) if value else None
+    for key, value in product.dict(exclude_unset=True).items():
+        setattr(db_product, key, value)
     db.commit()
     db.refresh(db_product)
     return db_product
