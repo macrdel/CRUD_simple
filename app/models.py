@@ -32,8 +32,8 @@ class PurchaseItem(Base):
     __tablename__ = "purchase_item"
 
     id = Column(Integer, primary_key=True, index=True)
-    purchase_id = Column(Integer, ForeignKey("purchases.id"))
-    product_id = Column(Integer, ForeignKey("products.id"))
+    purchase_id = Column(Integer, ForeignKey("purchase.id"))
+    product_id = Column(Integer, ForeignKey("product.id"))
     quantity = Column(Integer)
     price = Column(Float)
     total_price = Column(Float)
@@ -46,7 +46,7 @@ class Purchase(Base):
     __tablename__ = "purchase"
 
     id = Column(Integer, primary_key=True, index=True)
-    customer_id = Column(Integer, ForeignKey("customers.id"))
+    customer_id = Column(Integer, ForeignKey("customer.id"))
     purchase_date = Column(Date)
 
     customer = relationship("Customer", back_populates="purchases")
