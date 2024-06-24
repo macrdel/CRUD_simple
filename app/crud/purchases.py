@@ -3,7 +3,7 @@ from ..models import Purchase, PurchaseItem
 from ..schemas import PurchaseCreate, PurchaseUpdate
 
 def create_purchase(db: Session, purchase: PurchaseCreate):
-    db_purchase = Purchase(**purchase.dict())
+    db_purchase = Purchase(customer_id=purchase.customer_id, purchase_date=purchase.purchase_date)
     db.add(db_purchase)
     db.commit()
     db.refresh(db_purchase)
@@ -14,7 +14,7 @@ def create_purchase(db: Session, purchase: PurchaseCreate):
             product_id=item.product_id,
             quantity=item.quantity,
             price=item.price,
-            total_price=item.total_price
+            total_price=item.quantity * item.price 
         )
         db.add(db_purchase_item)
     db.commit()
@@ -42,7 +42,7 @@ def update_purchase(db: Session, purchase_id: int, purchase: PurchaseUpdate):
                 product_id=item.product_id,
                 quantity=item.quantity,
                 price=item.price,
-                total_price=item.total_price
+                total_price=item.quantity * item.price
             )
             db.add(db_purchase_item)
         db.commit()
